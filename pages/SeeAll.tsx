@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Search, SlidersHorizontal, MapPin, X, LayoutGrid, Map as MapIcon, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VILLAS, CATEGORIES } from '../constants';
 import { VillaCard } from '../components/VillaCard';
 import { Villa } from '../types';
+import { getCurrentUser, User } from '../lib/storage';
 
 export const SeeAll = () => {
   const { type } = useParams();
@@ -16,6 +17,22 @@ export const SeeAll = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const [selectedVilla, setSelectedVilla] = useState<Villa | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  // Get greeting based on time
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Selamat Pagi';
+    if (hour >= 12 && hour < 15) return 'Selamat Siang';
+    if (hour >= 15 && hour < 18) return 'Selamat Sore';
+    return 'Selamat Malam';
+  };
+
+  // Load current user
+  useEffect(() => {
+    const user = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
 
   // Filtering Logic
   const filteredVillas = VILLAS.filter(villa => {
@@ -45,7 +62,7 @@ export const SeeAll = () => {
               <span>Tawangmangu, Central Java</span>
             </div>
             <h2 className="text-xl font-bold text-stone-800 leading-none">
-              Good Morning, <span className="text-earth-600">Alex</span>
+              {getGreeting()}, <span className="text-earth-600">{currentUser?.name?.split(' ')[0] || 'Traveler'}</span>
             </h2>
            </div>
            

@@ -7,7 +7,7 @@ import { VillaCard } from '../components/VillaCard';
 import { Villa, Booking } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { getBookings } from '../lib/storage';
+import { getBookings, getCurrentUser, User } from '../lib/storage';
 
 // Lazy load Map component
 const Map = lazy(() => import('../components/Map').then(module => ({ default: module.Map })));
@@ -42,6 +42,22 @@ export const Home = () => {
   const [selectedVilla, setSelectedVilla] = useState<Villa | null>(null);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  // Get greeting based on time
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Selamat Pagi';
+    if (hour >= 12 && hour < 15) return 'Selamat Siang';
+    if (hour >= 15 && hour < 18) return 'Selamat Sore';
+    return 'Selamat Malam';
+  };
+
+  // Load current user
+  useEffect(() => {
+    const user = getCurrentUser();
+    setCurrentUser(user);
+  }, []);
 
   // User Location State
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
@@ -626,7 +642,7 @@ export const Home = () => {
                 {locationLoading && <Loader2 size={12} className="animate-spin ml-1" />}
               </button>
               <h2 className="text-2xl font-bold text-stone-800">
-                Good Morning, <span className="text-earth-600">Alex</span>
+                {getGreeting()}, <span className="text-earth-600">{currentUser?.name?.split(' ')[0] || 'Traveler'}</span>
               </h2>
             </div>
             <div className="flex gap-2">
