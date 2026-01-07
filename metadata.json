@@ -1,0 +1,7 @@
+{
+  "name": "Omah Turu",
+  "description": "A serene, earth-toned mobile-first villa booking application inspired by nature.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
