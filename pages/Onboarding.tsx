@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { ChevronRight } from 'lucide-react';
 import { completeOnboarding } from '../lib/storage';
+import brandingLogo from '../branding.png';
 
 const ONBOARDING_DATA = [
   {
@@ -85,7 +86,7 @@ export const Onboarding = () => {
       {/* Top Bar - dengan safe area untuk status bar */}
       <div className="absolute top-0 left-0 right-0 pt-[env(safe-area-inset-top,54px)] px-4 pb-2 z-20 flex justify-between items-center">
          <div className="inline-flex items-center gap-2">
-             <img src="/branding.png" alt="Omah Turu" className="h-8 w-auto object-contain" />
+             <img src={brandingLogo} alt="Omah Turu" className="h-8 w-auto object-contain" />
           </div>
           {!isLastSlide && (
              <button 
