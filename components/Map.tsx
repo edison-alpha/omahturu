@@ -232,7 +232,7 @@ function CustomMapControls() {
   if (!isLoaded) return null;
 
   return (
-    <div className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+    <div className="absolute right-3 top-[55%] -translate-y-1/2 z-10 flex flex-col items-center">
       {/* Main Control Container - Glass Effect */}
       <div className="bg-white/40 backdrop-blur-xl rounded-full shadow-lg py-2 px-1 flex flex-col items-center gap-1 border border-white/50">
         {/* Layer Switcher */}

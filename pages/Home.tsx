@@ -814,18 +814,16 @@ export const Home = () => {
 
           {/* Route Info - Compact */}
           {startLocation && endLocation && routeInfo && activeInput === null && (
-            <div className="mt-3 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-lg flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  <Clock size={14} className="text-earth-500" />
-                  <span className="font-bold text-stone-800 text-sm">{formatDuration(routeInfo.duration)}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Navigation size={14} className="text-stone-400" />
-                  <span className="font-medium text-stone-600 text-sm">{formatDistance(routeInfo.distance)}</span>
-                </div>
+            <div className="mt-2 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-md flex items-center gap-3 w-fit">
+              <div className="flex items-center gap-1">
+                <Clock size={12} className="text-earth-500" />
+                <span className="font-bold text-stone-800 text-xs">{formatDuration(routeInfo.duration)}</span>
               </div>
-              <span className="text-[10px] px-2 py-0.5 rounded-md font-bold bg-green-500 text-white">
+              <div className="flex items-center gap-1">
+                <Navigation size={12} className="text-stone-400" />
+                <span className="font-medium text-stone-500 text-xs">{formatDistance(routeInfo.distance)}</span>
+              </div>
+              <span className="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-green-500 text-white">
                 Fastest
               </span>
             </div>
@@ -833,8 +831,8 @@ export const Home = () => {
 
           {/* Loading Route */}
           {isLoadingRoute && (
-            <div className="mt-3 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
-              <Loader2 size={14} className="animate-spin text-earth-500" />
+            <div className="mt-2 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-md flex items-center gap-2 w-fit">
+              <Loader2 size={12} className="animate-spin text-earth-500" />
               <span className="text-xs text-stone-600">Menghitung rute...</span>
             </div>
           )}
